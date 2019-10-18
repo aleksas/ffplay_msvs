@@ -1,0 +1,14 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+configuration: Release
+platform:
+- x86
+- x64
+build:
+  project: source/ffplay.sln
+  verbosity: minimal
+artifacts:
+- path: source\Release\ffplay.exe
+  name: win32/ffplay.exe
+- path: source\x64\Release\ffplay.exe
+  name: win64/ffplay.exe

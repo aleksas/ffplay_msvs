@@ -32,20 +32,40 @@
             <RelDir>dependencies\ffmpeg-4.2.1-win64-dev-lgpl\include\compat</RelDir>
             <UrlPrefix>https://raw.githubusercontent.com/FFmpeg/FFmpeg/release/4.2/compat/</UrlPrefix>
         </Compat>
+        <Compat Include="va_copy.h" >
+            <RelDir>dependencies\ffmpeg-4.2.1-win32-dev-lgpl\include\compat</RelDir>
+            <UrlPrefix>https://raw.githubusercontent.com/FFmpeg/FFmpeg/release/4.2/compat/</UrlPrefix>
+        </Compat>
         <AVResample Include="avresample.h;version.h" >
             <RelDir>dependencies\ffmpeg-4.2.1-win64-dev-lgpl\include\libavresample</RelDir>
+            <UrlPrefix>https://raw.githubusercontent.com/FFmpeg/FFmpeg/release/4.2/libavresample/</UrlPrefix>
+        </AVResample>
+        <AVResample Include="avresample.h;version.h" >
+            <RelDir>dependencies\ffmpeg-4.2.1-win32-dev-lgpl\include\libavresample</RelDir>
             <UrlPrefix>https://raw.githubusercontent.com/FFmpeg/FFmpeg/release/4.2/libavresample/</UrlPrefix>
         </AVResample>
         <PostProc Include="postprocess.h;version.h" >
             <RelDir>dependencies\ffmpeg-4.2.1-win64-dev-lgpl\include\libpostproc</RelDir>
             <UrlPrefix>https://raw.githubusercontent.com/FFmpeg/FFmpeg/release/4.2/libpostproc/</UrlPrefix>
         </PostProc>
+        <PostProc Include="postprocess.h;version.h" >
+            <RelDir>dependencies\ffmpeg-4.2.1-win32-dev-lgpl\include\libpostproc</RelDir>
+            <UrlPrefix>https://raw.githubusercontent.com/FFmpeg/FFmpeg/release/4.2/libpostproc/</UrlPrefix>
+        </PostProc>
         <AVFormat Include="network.h;os_support.h;url.h" >
             <RelDir>dependencies\ffmpeg-4.2.1-win64-dev-lgpl\include\libavformat</RelDir>
             <UrlPrefix>https://raw.githubusercontent.com/FFmpeg/FFmpeg/release/4.2/libavformat/</UrlPrefix>
         </AVFormat>
+        <AVFormat Include="network.h;os_support.h;url.h" >
+            <RelDir>dependencies\ffmpeg-4.2.1-win32-dev-lgpl\include\libavformat</RelDir>
+            <UrlPrefix>https://raw.githubusercontent.com/FFmpeg/FFmpeg/release/4.2/libavformat/</UrlPrefix>
+        </AVFormat>
         <AVUtil Include="libm.h;wchar_filename.h" >
             <RelDir>dependencies\ffmpeg-4.2.1-win64-dev-lgpl\include\libavutil</RelDir>
+            <UrlPrefix>https://raw.githubusercontent.com/FFmpeg/FFmpeg/release/4.2/libavutil/</UrlPrefix>
+        </AVUtil>
+        <AVUtil Include="libm.h;wchar_filename.h" >
+            <RelDir>dependencies\ffmpeg-4.2.1-win32-dev-lgpl\include\libavutil</RelDir>
             <UrlPrefix>https://raw.githubusercontent.com/FFmpeg/FFmpeg/release/4.2/libavutil/</UrlPrefix>
         </AVUtil>
         <SourceFiles Include="@(FFTools);@(Compat);@(AVResample);@(PostProc);@(AVUtil);@(AVFormat);@(Config)" />
