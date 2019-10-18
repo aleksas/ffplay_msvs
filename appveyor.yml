@@ -9,14 +9,14 @@ build:
   verbosity: minimal
 artifacts:
 - path: source\Release\ffplay.exe
-  name: win32/ffplay.exe
+  name: win32
 - path: dependencies\ffmpeg-4.2.1-win32-shared-lgpl\bin\*.dll
-  name: win32/ffmpeg
+  name: win32
 - path: dependencies\x64\*.dll
-  name: win32/sdl
+  name: win32
 - path: source\x64\Release\ffplay.exe
-  name: win64/ffplay.exe
+  name: win64
 - path: dependencies\ffmpeg-4.2.1-win64-shared-lgpl\bin\*.dll
-  name: win64/ffmpeg
+  name: win64
 - path: dependencies\x64\*.dll
-  name: win64/sdl
+  name: win64
