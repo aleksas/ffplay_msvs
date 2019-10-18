@@ -2,3 +2,5 @@
 
 # ffplay_msvs
 Compile ffplay using MS VS
+
+* see [this post](https://www.gamedev.net/forums/topic/694817-vstudio-links-to-wrong-dll/) for swr_alloc problems...
