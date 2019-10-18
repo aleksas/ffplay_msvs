@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+	<Import Project="Utils.targets" />
+
+	<ItemGroup>
+        <DownloadFiles Include="https://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-4.2.1-win64-shared-lgpl.zip">
+            <RelDir></RelDir>
+        </DownloadFiles>
+        <DownloadFiles Include="https://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-4.2.1-win32-shared-lgpl.zip">
+            <RelDir></RelDir>
+        </DownloadFiles>
+        <DownloadFiles Include="https://www.libsdl.org/release/SDL2-2.0.10-win32-x64.zip">
+            <RelDir>x64</RelDir>
+        </DownloadFiles>
+        <DownloadFiles Include="https://www.libsdl.org/release/SDL2-2.0.10-win32-x86.zip">
+            <RelDir>x86</RelDir>
+        </DownloadFiles>
+        <DownloadFiles Include="https://ffmpeg.zeranoe.com/builds/win32/dev/ffmpeg-4.2.1-win32-dev-lgpl.zip">
+            <RelDir></RelDir>
+        </DownloadFiles>
+        <DownloadFiles Include="https://ffmpeg.zeranoe.com/builds/win64/dev/ffmpeg-4.2.1-win64-dev-lgpl.zip">
+            <RelDir></RelDir>
+        </DownloadFiles>
+        <DownloadFiles Include="https://www.libsdl.org/release/SDL2-devel-2.0.10-VC.zip">
+            <RelDir></RelDir>
+        </DownloadFiles>
+        <FFTools Include="ffplay.c;cmdutils.h" >
+            <RelDir>source</RelDir>
+            <UrlPrefix>https://raw.githubusercontent.com/FFmpeg/FFmpeg/release/4.2/fftools/</UrlPrefix>
+        </FFTools>
+        <Compat Include="va_copy.h" >
+            <RelDir>dependencies\ffmpeg-4.2.1-win64-dev-lgpl\include\compat</RelDir>
+            <UrlPrefix>https://raw.githubusercontent.com/FFmpeg/FFmpeg/release/4.2/compat/</UrlPrefix>
+        </Compat>
+        <AVResample Include="avresample.h;version.h" >
+            <RelDir>dependencies\ffmpeg-4.2.1-win64-dev-lgpl\include\libavresample</RelDir>
+            <UrlPrefix>https://raw.githubusercontent.com/FFmpeg/FFmpeg/release/4.2/libavresample/</UrlPrefix>
+        </AVResample>
+        <PostProc Include="postprocess.h;version.h" >
+            <RelDir>dependencies\ffmpeg-4.2.1-win64-dev-lgpl\include\libpostproc</RelDir>
+            <UrlPrefix>https://raw.githubusercontent.com/FFmpeg/FFmpeg/release/4.2/libpostproc/</UrlPrefix>
+        </PostProc>
+        <AVFormat Include="network.h;os_support.h;url.h" >
+            <RelDir>dependencies\ffmpeg-4.2.1-win64-dev-lgpl\include\libavformat</RelDir>
+            <UrlPrefix>https://raw.githubusercontent.com/FFmpeg/FFmpeg/release/4.2/libavformat/</UrlPrefix>
+        </AVFormat>
+        <AVUtil Include="libm.h;wchar_filename.h" >
+            <RelDir>dependencies\ffmpeg-4.2.1-win64-dev-lgpl\include\libavutil</RelDir>
+            <UrlPrefix>https://raw.githubusercontent.com/FFmpeg/FFmpeg/release/4.2/libavutil/</UrlPrefix>
+        </AVUtil>
+        <SourceFiles Include="@(FFTools);@(Compat);@(AVResample);@(PostProc);@(AVUtil);@(AVFormat);@(Config)" />
+	</ItemGroup>
+
+    <Target Name="Download">
+        <CreateItem
+            Include="@(SourceFiles->'%(UrlPrefix)%(Identity)')"
+            AdditionalMetadata="RelDir=%(RelDir)">
+           <Output
+               TaskParameter="Include"
+               ItemName="DownloadFiles"/>
+        </CreateItem>
+
+        <MakeDir Directories="download;dependencies;dependencies\x86;dependencies\x64"/>
+        <MakeDir Directories="download\%(DownloadFiles.RelDir)"/>
+        
+        <MakeDir Directories="%(SourceFiles.RelDir)"/>
+
+        <DownloadFile Address="@(DownloadFiles)" FileName="download\%(RelDir)\%(Filename)%(Extension)" />
+
+        <Copy
+            SourceFiles="@(SourceFiles->'download\%(RelDir)\%(Identity)')"
+            DestinationFiles="%(RelDir)\%(Filename)%(Extension)" 
+            SkipUnchangedFiles="true" />
+        
+        <Exec
+            Command="powershell -command &quot;&amp; expand-archive -force -path 'download\%(RelDir)\%(DownloadFiles.Filename)%(Extension)' -destinationpath '.\dependencies\%(RelDir)' &quot;"
+            Condition="'%(Extension)'=='.zip'" />
+    </Target>
+</Project>
