@@ -12,7 +12,7 @@ artifacts:
   name: win32
 - path: dependencies\ffmpeg-4.2.1-win32-shared-lgpl\bin\*.dll
   name: win32
-- path: dependencies\x64\*.dll
+- path: dependencies\x86\*.dll
   name: win32
 - path: source\x64\Release\ffplay.exe
   name: win64
