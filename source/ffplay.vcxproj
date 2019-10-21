@@ -150,6 +150,7 @@
       <AdditionalLibraryDirectories>..\dependencies\SDL2-2.0.10\lib\x86;..\dependencies\ffmpeg-4.2.1-win32-dev-lgpl\lib</AdditionalLibraryDirectories>
       <ShowProgress>NotSet</ShowProgress>
       <AdditionalDependencies>avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImageHasSafeExceptionHandlers />
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
