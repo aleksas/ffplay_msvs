@@ -3,24 +3,6 @@
 	<Import Project="Utils.targets" />
 
 	<ItemGroup>
-        <DownloadFiles Include="https://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-4.2.1-win64-shared-lgpl.zip">
-            <RelDir></RelDir>
-        </DownloadFiles>
-        <DownloadFiles Include="https://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-4.2.1-win32-shared-lgpl.zip">
-            <RelDir></RelDir>
-        </DownloadFiles>
-        <DownloadFiles Include="https://www.libsdl.org/release/SDL2-2.0.10-win32-x64.zip">
-            <RelDir>x64</RelDir>
-        </DownloadFiles>
-        <DownloadFiles Include="https://www.libsdl.org/release/SDL2-2.0.10-win32-x86.zip">
-            <RelDir>x86</RelDir>
-        </DownloadFiles>
-        <DownloadFiles Include="https://ffmpeg.zeranoe.com/builds/win32/dev/ffmpeg-4.2.1-win32-dev-lgpl.zip">
-            <RelDir></RelDir>
-        </DownloadFiles>
-        <DownloadFiles Include="https://ffmpeg.zeranoe.com/builds/win64/dev/ffmpeg-4.2.1-win64-dev-lgpl.zip">
-            <RelDir></RelDir>
-        </DownloadFiles>
         <DownloadFiles Include="https://www.libsdl.org/release/SDL2-devel-2.0.10-VC.zip">
             <RelDir></RelDir>
         </DownloadFiles>
@@ -71,7 +53,33 @@
         <SourceFiles Include="@(FFTools);@(Compat);@(AVResample);@(PostProc);@(AVUtil);@(AVFormat);@(Config)" />
 	</ItemGroup>
 
-    <Target Name="Download">
+	<ItemGroup Condition="'$(Platform)'=='x64'">
+        <DownloadFiles Include="https://ffmpeg.zeranoe.com/builds/win64/shared/ffmpeg-4.2.1-win64-shared-lgpl.zip">
+            <RelDir></RelDir>
+        </DownloadFiles>
+        <DownloadFiles Include="https://www.libsdl.org/release/SDL2-2.0.10-win32-x64.zip">
+            <RelDir>x64</RelDir>
+        </DownloadFiles>
+        <DownloadFiles Include="https://ffmpeg.zeranoe.com/builds/win64/dev/ffmpeg-4.2.1-win64-dev-lgpl.zip">
+            <RelDir></RelDir>
+        </DownloadFiles>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Platform)'=='x86'">
+        <DownloadFiles Include="https://ffmpeg.zeranoe.com/builds/win32/shared/ffmpeg-4.2.1-win32-shared-lgpl.zip">
+            <RelDir></RelDir>
+        </DownloadFiles>
+        <DownloadFiles Include="https://www.libsdl.org/release/SDL2-2.0.10-win32-x86.zip">
+            <RelDir>x86</RelDir>
+        </DownloadFiles>
+        <DownloadFiles Include="https://ffmpeg.zeranoe.com/builds/win32/dev/ffmpeg-4.2.1-win32-dev-lgpl.zip">
+            <RelDir></RelDir>
+        </DownloadFiles>
+	</ItemGroup>
+
+    <Target Name="Download Dependencies">
+        <Warning Text="Platform:$(Platform) Configuration:$(Configuration)" />
+
         <CreateItem
             Include="@(SourceFiles->'%(UrlPrefix)%(Identity)')"
             AdditionalMetadata="RelDir=%(RelDir)">
